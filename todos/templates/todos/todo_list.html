@@ -1,0 +1,33 @@
+{% extends "todos/base.html" %}
+
+{% block content %}
+  <h1>📝 Todo List</h1>
+  <p><a class="btn btn-primary" href="{% url 'todos:create' %}">+ 할 일 등록</a></p>
+
+  <ul class="todo-list">
+    {% for todo in todos %}
+      <li class="todo-item {% if todo.is_completed %}completed{% endif %}">
+        <form method="post" action="{% url 'todos:toggle' todo.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="check-btn" title="완료 체크">{% if todo.is_completed %}✓{% endif %}</button>
+        </form>
+
+        <div class="todo-body">
+          <div class="todo-title">{{ todo.title }}</div>
+          {% if todo.content %}<div class="todo-content">{{ todo.content }}</div>{% endif %}
+          <div class="todo-date">{{ todo.created_at|date:"Y-m-d H:i" }}</div>
+        </div>
+
+        <div class="todo-actions">
+          <a class="btn btn-gray btn-sm" href="{% url 'todos:update' todo.pk %}">수정</a>
+          <form method="post" action="{% url 'todos:delete' todo.pk %}" onsubmit="return confirm('삭제하시겠습니까?');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+          </form>
+        </div>
+      </li>
+    {% empty %}
+      <li class="empty">등록된 할 일이 없습니다.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

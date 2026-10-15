@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Todo List{% endblock %}</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: "Malgun Gothic", sans-serif; background: #f4f6f9; margin: 0; padding: 40px 16px; color: #222; }
+    .container { max-width: 640px; margin: 0 auto; background: #fff; padding: 28px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+    h1 { margin-top: 0; font-size: 26px; }
+    a { color: #3b6fd8; text-decoration: none; }
+    .btn { display: inline-block; padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #3b6fd8; color: #fff; }
+    .btn-gray { background: #e3e6ea; color: #333; }
+    .btn-danger { background: #e05555; color: #fff; }
+    .btn-sm { padding: 5px 10px; font-size: 13px; }
+    .messages { list-style: none; padding: 0; }
+    .messages li { background: #e6f4ea; color: #1e6b34; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; }
+    .todo-list { list-style: none; padding: 0; }
+    .todo-item { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e3e6ea; border-radius: 8px; margin-bottom: 10px; }
+    .todo-item.completed { background: #eef1f4; }
+    .todo-item.completed .todo-title { text-decoration: line-through; color: #999; }
+    .todo-body { flex: 1; min-width: 0; }
+    .todo-title { font-weight: bold; font-size: 16px; }
+    .todo-content { color: #666; font-size: 14px; margin-top: 4px; white-space: pre-line; }
+    .todo-date { color: #aaa; font-size: 12px; margin-top: 4px; }
+    .todo-actions { display: flex; gap: 6px; }
+    .todo-actions form { margin: 0; }
+    .check-btn { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #3b6fd8; background: #fff; cursor: pointer; font-size: 14px; color: #fff; padding: 0; }
+    .completed .check-btn { background: #3b6fd8; }
+    .empty { text-align: center; color: #999; padding: 30px 0; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 6px; }
+    .form-group input[type=text], .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; font-family: inherit; }
+    .form-group.has-error input, .form-group.has-error textarea { border-color: #e05555; }
+    .errorlist { list-style: none; padding: 0; margin: 6px 0 0; color: #e05555; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
