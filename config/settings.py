@@ -130,6 +130,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# 기본 PK 타입 (기존 마이그레이션과 동일하게 BigAutoField 사용)
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
